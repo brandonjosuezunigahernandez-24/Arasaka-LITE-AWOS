@@ -1,0 +1,116 @@
+@import './Patients.css';
+
+.toolbar {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  background: #4a7fa5;
+  color: white;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover:not(:disabled) { background: #3a6f95; }
+.btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.form-card { margin-bottom: 20px; }
+
+.appt-form {
+  padding: 20px 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.appt-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.appt-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.appt-form input,
+.appt-form textarea {
+  padding: 9px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #2d3748;
+  background: #f7fafc;
+  outline: none;
+  transition: border 0.15s;
+  font-family: inherit;
+}
+
+.appt-form input:focus,
+.appt-form textarea:focus {
+  border-color: #4a9fd4;
+  background: #fff;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn-confirm {
+  background: #c6f6d5;
+  color: #22543d;
+  border: none;
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-confirm:hover { background: #9ae6b4; }
+
+.btn-cancel {
+  background: #fefcbf;
+  color: #744210;
+  border: none;
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-cancel:hover { background: #faf089; }
+
+.btn-delete {
+  background: #fed7d7;
+  color: #822727;
+  border: none;
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-delete:hover { background: #feb2b2; }
+
+.status-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.status-pending { background: #fefcbf; color: #744210; }
+.status-confirmed { background: #c6f6d5; color: #22543d; }
+.status-cancelled { background: #fed7d7; color: #822727; }

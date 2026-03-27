@@ -1,0 +1,242 @@
+{
+  "info": {
+    "name": "ArasakaHealth API",
+    "description": "Coleccion de pruebas para Fase 4 y Fase 5. Incluye autenticacion, pacientes, citas y casos de error.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8000/api/v1" },
+    { "key": "token_doctor", "value": "" },
+    { "key": "token_patient", "value": "" },
+    { "key": "doctor_id", "value": "2" },
+    { "key": "patient_id", "value": "3" },
+    { "key": "appointment_id", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "01 Register Doctor",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dr. Miguel\",\n  \"email\": \"miguel@arasakahealth.com\",\n  \"password\": \"Miguel123!\",\n  \"password_confirmation\": \"Miguel123!\",\n  \"role\": \"doctor\"\n}"
+        },
+        "url": "{{base_url}}/auth/register"
+      }
+    },
+    {
+      "name": "02 Register Patient",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Brandon Zuniga\",\n  \"email\": \"brandon@arasakahealth.com\",\n  \"password\": \"Brandon123!\",\n  \"password_confirmation\": \"Brandon123!\",\n  \"role\": \"patient\"\n}"
+        },
+        "url": "{{base_url}}/auth/register"
+      }
+    },
+    {
+      "name": "03 Login Doctor",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"miguel@arasakahealth.com\",\n  \"password\": \"Miguel123!\"\n}"
+        },
+        "url": "{{base_url}}/auth/login"
+      }
+    },
+    {
+      "name": "04 Login Patient",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"brandon@arasakahealth.com\",\n  \"password\": \"Brandon123!\"\n}"
+        },
+        "url": "{{base_url}}/auth/login"
+      }
+    },
+    {
+      "name": "05 List Patients",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token_doctor}}" }
+        ],
+        "url": "{{base_url}}/patients"
+      }
+    },
+    {
+      "name": "06 Get Patient Detail",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token_doctor}}" }
+        ],
+        "url": "{{base_url}}/patients/{{patient_id}}"
+      }
+    },
+    {
+      "name": "07 Update Patient Profile",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token_patient}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"blood_type\": \"O+\",\n  \"weight_kg\": 78,\n  \"height_cm\": 175,\n  \"phone\": \"4421234567\"\n}"
+        },
+        "url": "{{base_url}}/patients/{{patient_id}}"
+      }
+    },
+    {
+      "name": "08 Create Appointment",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token_patient}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"doctor_id\": {{doctor_id}},\n  \"scheduled_at\": \"2026-06-15 10:00:00\",\n  \"notes\": \"Control mensual de glucosa\"\n}"
+        },
+        "url": "{{base_url}}/appointments"
+      }
+    },
+    {
+      "name": "09 List Appointments",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token_doctor}}" }
+        ],
+        "url": "{{base_url}}/appointments"
+      }
+    },
+    {
+      "name": "10 Confirm Appointment",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token_doctor}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"confirmed\"\n}"
+        },
+        "url": "{{base_url}}/appointments/{{appointment_id}}"
+      }
+    },
+    {
+      "name": "11 Delete Appointment",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token_doctor}}" }
+        ],
+        "url": "{{base_url}}/appointments/{{appointment_id}}"
+      }
+    },
+    {
+      "name": "12 Logout Doctor",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token_doctor}}" }
+        ],
+        "url": "{{base_url}}/auth/logout"
+      }
+    },
+    {
+      "name": "E01 Login Wrong Password",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"miguel@arasakahealth.com\",\n  \"password\": \"incorrecta\"\n}"
+        },
+        "url": "{{base_url}}/auth/login"
+      }
+    },
+    {
+      "name": "E02 Patients Without Token",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": "{{base_url}}/patients"
+      }
+    },
+    {
+      "name": "E03 Patients With Patient Token",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token_patient}}" }
+        ],
+        "url": "{{base_url}}/patients"
+      }
+    },
+    {
+      "name": "E04 Get Missing Patient",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token_doctor}}" }
+        ],
+        "url": "{{base_url}}/patients/9999"
+      }
+    },
+    {
+      "name": "E05 Invalid Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"\",\n  \"email\": \"NOHAYXD\",\n  \"password\": \"123\",\n  \"password_confirmation\": \"456\",\n  \"role\": \"inexistente\"\n}"
+        },
+        "url": "{{base_url}}/auth/register"
+      }
+    }
+  ]
+}
